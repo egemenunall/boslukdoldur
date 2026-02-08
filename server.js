@@ -5,7 +5,7 @@ import { initializeSocketServer } from './server/socket-server.ts';
 
 const dev = process.env.NODE_ENV !== 'production';
 const hostname = '0.0.0.0'; // Tüm network interface'lerini dinle
-const port = 3000;
+const port = parseInt(process.env.PORT || '3000', 10); // Railway dinamik port kullanır
 
 const app = next({ dev, hostname, port });
 const handle = app.getRequestHandler();
@@ -32,6 +32,9 @@ app.prepare().then(() => {
     })
     .listen(port, hostname, () => {
       console.log(`> Ready on http://localhost:${port}`);
-      console.log(`> Network: http://192.168.1.3:${port}`);
+      console.log(`> Environment: ${dev ? 'development' : 'production'}`);
+      if (process.env.RAILWAY_STATIC_URL) {
+        console.log(`> Railway URL: https://${process.env.RAILWAY_STATIC_URL}`);
+      }
     });
 });

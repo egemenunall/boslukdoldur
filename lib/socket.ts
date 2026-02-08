@@ -9,14 +9,17 @@ export function getSocket(): Socket<ServerToClientEvents, ClientToServerEvents> 
   if (!socket) {
     // Sunucu URL'ini otomatik belirle
     const socketUrl = typeof window !== 'undefined' 
-      ? `${window.location.protocol}//${window.location.hostname}:3000`
+      ? `${window.location.protocol}//${window.location.host}`
       : 'http://localhost:3000';
+    
+    console.log('Connecting to socket URL:', socketUrl);
     
     socket = io(socketUrl, {
       reconnection: true,
       reconnectionDelay: 1000,
       reconnectionDelayMax: 5000,
       reconnectionAttempts: 5,
+      path: '/socket.io',
     });
 
     socket.on('connect', () => {
