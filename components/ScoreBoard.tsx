@@ -32,7 +32,7 @@ export default function ScoreBoard({
   }, [scores]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-hsd-primary via-hsd-secondary to-hsd-dark flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-hsd-dark via-hsd-primary to-red-900 flex items-center justify-center p-4">
       <div className="w-full max-w-3xl">
         {/* Header */}
         <div className="text-center mb-6">

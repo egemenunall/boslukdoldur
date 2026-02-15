@@ -33,9 +33,16 @@ export default function QuestionRound({
     if (externalError) {
       setLocalError(externalError);
       setSubmitted(false); // Hata varsa tekrar denesin
-      setTimeout(() => setLocalError(''), 3000);
     }
   }, [externalError]);
+
+  const handleAnswerChange = (value: string) => {
+    setAnswer(value);
+    // Kullanıcı yeni bir şey yazmaya başladığında hatayı temizle
+    if (localError) {
+      setLocalError('');
+    }
+  };
 
   const handleSubmit = () => {
     if (answer.trim()) {
@@ -67,7 +74,7 @@ export default function QuestionRound({
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-hsd-primary via-hsd-secondary to-hsd-dark flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-hsd-dark via-hsd-primary to-red-900 flex items-center justify-center p-4">
       <div className="w-full max-w-2xl">
         {/* Header */}
         <div className="text-center mb-6">
@@ -100,7 +107,7 @@ export default function QuestionRound({
                 <input
                   type="text"
                   value={answer}
-                  onChange={(e) => setAnswer(e.target.value)}
+                  onChange={(e) => handleAnswerChange(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSubmit()}
                   placeholder="Bir kelime yaz (gerçek cevabı bilmiyorsun!)"
                   className="w-full px-4 py-4 border-2 border-hsd-light rounded-xl focus:outline-none focus:border-hsd-secondary transition-colors text-lg"
