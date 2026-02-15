@@ -9,26 +9,39 @@ interface QuestionRoundProps {
   round: number;
   totalRounds: number;
   onSubmitAnswer: (answer: string) => void;
+  error?: string;
 }
 
 export default function QuestionRound({ 
   question, 
   round, 
   totalRounds, 
-  onSubmitAnswer 
+  onSubmitAnswer,
+  error: externalError
 }: QuestionRoundProps) {
   const [answer, setAnswer] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [localError, setLocalError] = useState('');
 
   useEffect(() => {
     setAnswer('');
     setSubmitted(false);
+    setLocalError('');
   }, [question]);
+  
+  useEffect(() => {
+    if (externalError) {
+      setLocalError(externalError);
+      setSubmitted(false); // Hata varsa tekrar denesin
+      setTimeout(() => setLocalError(''), 3000);
+    }
+  }, [externalError]);
 
   const handleSubmit = () => {
     if (answer.trim()) {
-      onSubmitAnswer(answer.trim());
+      setLocalError('');
       setSubmitted(true);
+      onSubmitAnswer(answer.trim());
     }
   };
 
@@ -82,20 +95,20 @@ export default function QuestionRound({
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Cevabınızı yazın
+                  Boşluğu mantıklı bir kelime ile doldur
                 </label>
                 <input
                   type="text"
                   value={answer}
                   onChange={(e) => setAnswer(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSubmit()}
-                  placeholder="Boşluğu doldurun..."
+                  placeholder="Bir kelime yaz (gerçek cevabı bilmiyorsun!)"
                   className="w-full px-4 py-4 border-2 border-hsd-light rounded-xl focus:outline-none focus:border-hsd-secondary transition-colors text-lg"
                   maxLength={50}
                   autoFocus
                 />
                 <p className="text-xs text-gray-500 mt-1">
-                  {answer.length}/50 karakter
+                  {answer.length}/50 karakter - İnandırıcı ol!
                 </p>
               </div>
 
@@ -110,6 +123,13 @@ export default function QuestionRound({
               >
                 Cevabı Gönder
               </button>
+              
+              {/* Local Error Display */}
+              {localError && (
+                <div className="bg-red-50 border-2 border-red-300 rounded-xl p-3 text-red-700 text-center text-sm">
+                  {localError}
+                </div>
+              )}
             </div>
           ) : (
             <div className="space-y-4">
@@ -142,9 +162,10 @@ export default function QuestionRound({
 
         {/* Hint */}
         <div className="text-center mt-6 text-white text-sm">
-          <p className="font-semibold mb-1">💡 Nasıl Oynanır?</p>
-          <p>Doğru cevabı BİLMİYORMUŞ gibi yaparak yalan bir cevap yaz!</p>
-          <p className="mt-1">Diğer oyuncuları kandır ve puan kazan! 😈</p>
+          <p className="font-semibold mb-2">💡 Nasıl Oynanır?</p>
+          <p className="mb-1">❌ Doğru cevabı bilmiyorsun!</p>
+          <p className="mb-1">✅ Boşluğu mantıklı bir kelime ile doldur</p>
+          <p className="font-medium text-hsd-accent">🎯 Hedef: Diğerlerini kandır, senin cevabını seçsinler!</p>
         </div>
       </div>
     </div>

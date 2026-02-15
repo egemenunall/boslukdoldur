@@ -258,6 +258,7 @@ export default function RoomPage() {
           round={currentRound}
           totalRounds={totalRounds}
           onSubmitAnswer={handleSubmitAnswer}
+          error={error}
         />
       )}
 

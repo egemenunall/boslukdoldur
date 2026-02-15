@@ -377,7 +377,28 @@ export function initializeSocketServer(httpServer: HTTPServer) {
           return;
         }
         
-        player.answer = data.answer;
+        const trimmedAnswer = data.answer.trim().toLowerCase();
+        
+        // Doğru cevap kontrolü
+        if (room.currentQuestion && 
+            trimmedAnswer === room.currentQuestion.correctAnswer.toLowerCase()) {
+          callback({ success: false, error: 'Gerçek doğru cevabı yazdın! Başka bir şey dene 😉' });
+          return;
+        }
+        
+        // Duplicate cevap kontrolü (diğer oyuncular)
+        const isDuplicate = room.players.some(p => 
+          p.id !== socket.id && 
+          p.answer && 
+          p.answer.toLowerCase() === trimmedAnswer
+        );
+        
+        if (isDuplicate) {
+          callback({ success: false, error: 'Bu cevap başka bir oyuncu tarafından yazılmış!' });
+          return;
+        }
+        
+        player.answer = data.answer.trim();
         callback({ success: true });
         
         // Check if all players submitted

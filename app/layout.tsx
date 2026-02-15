@@ -5,8 +5,8 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'HSD Boşluğu Doldur',
-  description: 'HSD Network - Eğlenceli çok oyunculu kelime oyunu',
+  title: 'HSD DEU Boşluğu Doldur',
+  description: 'HSD DEU Network - Eğlenceli çok oyunculu kelime oyunu',
 }
 
 export default function RootLayout({

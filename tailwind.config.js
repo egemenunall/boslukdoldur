@@ -9,23 +9,23 @@ module.exports = {
     extend: {
       colors: {
         hsd: {
-          primary: '#1e3a8a', // Koyu mavi
-          secondary: '#2563eb', // Mavi
-          accent: '#f59e0b', // Turuncu
-          dark: '#0f172a', // Çok koyu
-          light: '#e0e7ff', // Açık mavi
+          primary: '#dc2626', // Kırmızı
+          secondary: '#ef4444', // Açık kırmızı
+          accent: '#f59e0b', // Turuncu/altın
+          dark: '#7f1d1d', // Koyu kırmızı
+          light: '#fee2e2', // Açık pembe
         },
         primary: {
-          50: '#eff6ff',
-          100: '#dbeafe',
-          200: '#bfdbfe',
-          300: '#93c5fd',
-          400: '#60a5fa',
-          500: '#2563eb',
-          600: '#1e40af',
-          700: '#1e3a8a',
-          800: '#1e3a8a',
-          900: '#1e3a8a',
+          50: '#fef2f2',
+          100: '#fee2e2',
+          200: '#fecaca',
+          300: '#fca5a5',
+          400: '#f87171',
+          500: '#ef4444',
+          600: '#dc2626',
+          700: '#b91c1c',
+          800: '#991b1b',
+          900: '#7f1d1d',
         },
       },
       animation: {

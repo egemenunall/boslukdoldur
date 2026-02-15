@@ -143,7 +143,7 @@ export default function ScoreBoard({
               <p className="text-gray-600">
                 Oyunu {animatedScores[0]?.score} puanla kazandın!
               </p>
-              <p className="text-sm text-gray-500 mt-3">© HSD Network</p>
+              <p className="text-sm text-gray-500 mt-3">© HSD DEU Network</p>
             </div>
           )}
 

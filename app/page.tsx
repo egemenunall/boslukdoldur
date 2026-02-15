@@ -147,7 +147,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-hsd-primary via-hsd-secondary to-hsd-dark flex items-center justify-center p-4">
+    <main className="min-h-screen bg-gradient-to-br from-hsd-dark via-hsd-primary to-red-900 flex items-center justify-center p-4">
       {/* Connection Status */}
       <div className="fixed top-4 right-4 z-50">
         <div className={`px-4 py-2 rounded-lg shadow-lg flex items-center gap-2 ${
@@ -166,35 +166,29 @@ export default function Home() {
         {/* Header */}
         <div className="text-center mb-8">
           <div className="mb-4">
-            <div className="inline-block bg-white px-6 py-3 rounded-2xl shadow-xl">
-              <h1 className="text-4xl font-black text-hsd-primary">HSD</h1>
+            <div className="inline-block bg-white px-8 py-4 rounded-2xl shadow-2xl">
+              <h1 className="text-5xl font-black text-hsd-primary">HSD DEU</h1>
             </div>
           </div>
-          <h2 className="text-5xl font-bold text-white mb-2">
+          <h2 className="text-5xl font-black text-white mb-2 drop-shadow-lg">
             Boşluğu Doldur
           </h2>
-          <p className="text-hsd-light text-lg mb-2">
-            Eğlenceli kelime oyunu
-          </p>
-          <p className="text-white text-sm opacity-80">
-            💡 Yalan söyle, başkalarını kandır, puan kazan!
+          <p className="text-red-100 text-lg">
+            Kandır ve Kazan! 🎯
           </p>
         </div>
 
         {/* Main Card */}
-        <div className="bg-white rounded-3xl shadow-2xl p-8 space-y-6">
+        <div className="bg-white rounded-3xl shadow-2xl p-8 space-y-5">
           {/* Name Input */}
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-              İsminiz
-            </label>
             <input
               id="name"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Adınızı girin"
-              className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-hsd-secondary transition-colors"
+              placeholder="İsminizi yazın"
+              className="w-full px-5 py-4 bg-gray-50 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-hsd-primary focus:bg-white transition-all text-lg text-gray-900 placeholder:text-gray-400"
               maxLength={20}
             />
           </div>
@@ -202,36 +196,33 @@ export default function Home() {
           {/* Create Room Button */}
           <button
             onClick={handleCreateRoom}
-            disabled={isCreating || isJoining}
-            className="w-full bg-gradient-to-r from-hsd-primary to-hsd-secondary text-white font-semibold py-4 rounded-xl hover:from-hsd-secondary hover:to-hsd-primary transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg"
+            disabled={isCreating || isJoining || !name.trim()}
+            className="w-full bg-gradient-to-r from-hsd-primary to-red-700 text-white font-bold py-4 text-xl rounded-xl hover:shadow-xl transition-all transform hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg"
           >
-            {isCreating ? 'Oluşturuluyor...' : 'Yeni Oda Oluştur'}
+            {isCreating ? '⏳ Oluşturuluyor...' : '🎮 Yeni Oyun Başlat'}
           </button>
 
           {/* Divider */}
-          <div className="relative">
+          <div className="relative my-4">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t-2 border-gray-200"></div>
+              <div className="w-full border-t border-gray-200"></div>
             </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-white text-gray-500 font-medium">
-                veya
+            <div className="relative flex justify-center text-xs">
+              <span className="px-3 bg-white text-gray-400 font-medium">
+                Arkadaşının odasına katıl
               </span>
             </div>
           </div>
 
           {/* Room Code Input */}
           <div>
-            <label htmlFor="roomCode" className="block text-sm font-medium text-gray-700 mb-2">
-              Oda Kodu
-            </label>
             <input
               id="roomCode"
               type="text"
               value={roomCode}
               onChange={(e) => setRoomCode(e.target.value.toUpperCase())}
-              placeholder="6 haneli kod"
-              className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-hsd-accent transition-colors uppercase text-center tracking-wider font-semibold text-xl"
+              placeholder="ODA KODU"
+              className="w-full px-4 py-4 bg-gray-50 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-hsd-accent focus:bg-white transition-all uppercase text-center tracking-widest font-bold text-xl text-gray-900 placeholder:text-gray-300"
               maxLength={6}
             />
           </div>
@@ -239,27 +230,30 @@ export default function Home() {
           {/* Join Room Button */}
           <button
             onClick={handleJoinRoom}
-            disabled={isCreating || isJoining}
-            className="w-full bg-gradient-to-r from-hsd-accent to-orange-600 text-white font-semibold py-4 rounded-xl hover:from-orange-600 hover:to-hsd-accent transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg"
+            disabled={isCreating || isJoining || !name.trim() || roomCode.length !== 6}
+            className="w-full bg-gradient-to-r from-hsd-accent to-orange-600 text-white font-bold py-4 text-xl rounded-xl hover:shadow-xl transition-all transform hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg"
           >
-            {isJoining ? 'Katılınıyor...' : 'Odaya Katıl'}
+            {isJoining ? '⏳ Katılınıyor...' : '🚪 Odaya Katıl'}
           </button>
 
           {/* Error Message */}
           {error && (
-            <div className="bg-red-50 border-2 border-red-200 rounded-xl p-4 text-red-700 text-center">
-              {error}
+            <div className="bg-red-50 border-2 border-red-300 rounded-xl p-3 text-red-700 text-center text-sm font-medium">
+              ⚠️ {error}
             </div>
           )}
         </div>
 
-        {/* Footer */}
-        <div className="text-center mt-6 text-white text-sm opacity-90">
-          <p className="font-semibold">⚡ Hızlı Kurallar:</p>
-          <p className="mt-2">1️⃣ Yalan bir cevap yaz (doğruyu bilme!)</p>
-          <p>2️⃣ Hangisi gerçek doğru cevap bul</p>
-          <p>3️⃣ Kandır ve kazan! 🎯</p>
-          <p className="mt-3 text-xs opacity-75">© HSD Network</p>
+        {/* Footer Info */}
+        <div className="text-center mt-6">
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-white/90">
+            <p className="font-semibold mb-2">Nasıl Oynanır?</p>
+            <div className="space-y-1 text-sm text-white/80">
+              <p>✍️ Yalan cevap yaz</p>
+              <p>🎭 Diğerlerini kandır</p>
+              <p>🏆 En çok puanı topla!</p>
+            </div>
+          </div>
         </div>
       </div>
     </main>

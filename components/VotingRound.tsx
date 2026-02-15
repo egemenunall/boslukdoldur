@@ -72,13 +72,15 @@ export default function VotingRound({ question, answers, onSubmitVote }: VotingR
 
           {/* Instructions */}
           {!submitted && (
-            <div className="bg-hsd-light border-2 border-hsd-secondary rounded-xl p-4 text-center">
-              <p className="text-hsd-primary font-medium">
-                ⚠️ Hangisi GERÇEK doğru cevap? Yalan cevapları seçme!
+            <div className="bg-hsd-light border-2 border-hsd-secondary rounded-xl p-4">
+              <p className="text-hsd-primary font-bold text-center mb-2">
+                🎯 Hangisi GERÇEK doğru cevap?
               </p>
-              <p className="text-sm text-gray-600 mt-1">
-                Doğru bilirsen +1 puan, başkalarını kandırırsan her oyuncu için +1 puan!
-              </p>
+              <div className="text-sm text-gray-700 space-y-1">
+                <p>• Tüm oyuncuların tahminleri + 1 gerçek cevap</p>
+                <p>• Kendi cevabını göremezsin</p>
+                <p className="font-semibold text-hsd-accent">💰 Doğruyu seçersen +1 puan!</p>
+              </div>
             </div>
           )}
 

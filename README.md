@@ -1,6 +1,6 @@
-# HSD Boşluğu Doldur 🎮
+# HSD DEU Boşluğu Doldur 🎮
 
-Zarta/Psych! tarzı eğlenceli çok oyunculu kelime oyunu - HSD Network
+Zarta/Psych! tarzı eğlenceli çok oyunculu kelime oyunu - HSD DEU Network
 
 ## 🎯 Nasıl Oynanır?
 
