@@ -173,8 +173,11 @@ export default function Home() {
           <h2 className="text-5xl font-bold text-white mb-2">
             Boşluğu Doldur
           </h2>
-          <p className="text-hsd-light text-lg">
+          <p className="text-hsd-light text-lg mb-2">
             Eğlenceli kelime oyunu
+          </p>
+          <p className="text-white text-sm opacity-80">
+            💡 Yalan söyle, başkalarını kandır, puan kazan!
           </p>
         </div>
 
@@ -252,8 +255,10 @@ export default function Home() {
 
         {/* Footer */}
         <div className="text-center mt-6 text-white text-sm opacity-90">
-          <p>En az 2 oyuncu ile oynanır</p>
-          <p className="mt-1">Her oyun 10 turdan oluşur</p>
+          <p className="font-semibold">⚡ Hızlı Kurallar:</p>
+          <p className="mt-2">1️⃣ Yalan bir cevap yaz (doğruyu bilme!)</p>
+          <p>2️⃣ Hangisi gerçek doğru cevap bul</p>
+          <p>3️⃣ Kandır ve kazan! 🎯</p>
           <p className="mt-3 text-xs opacity-75">© HSD Network</p>
         </div>
       </div>

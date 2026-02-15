@@ -46,23 +46,24 @@ function clearRoomTimeout(roomCode: string) {
   }
 }
 
-// Helper: Calculate scores
+// Helper: Calculate scores (Zarta/Psych! mantığı)
 function calculateScores(room: Room): PlayerScore[] {
   const scores: PlayerScore[] = [];
   
   room.players.forEach(player => {
     const roundScore = { roundScore: 0, votesReceived: 0, isCorrect: false };
     
-    // Check if player voted for correct answer
+    // Doğru cevabı seçtiyse +1 puan (Zarta'da böyle)
     if (player.votedFor === 'correct') {
-      roundScore.roundScore += 2;
+      roundScore.roundScore += 1;
       roundScore.isCorrect = true;
     }
     
-    // Count votes received for this player's answer
+    // Başka oyuncular bu oyuncunun cevabını seçtiyse
+    // Her kandırılan oyuncu için +1 puan
     if (player.answer) {
       const votesReceived = room.players.filter(
-        p => p.votedFor === player.id
+        p => p.votedFor === player.id && p.id !== player.id // Kendisi hariç
       ).length;
       roundScore.roundScore += votesReceived;
       roundScore.votesReceived = votesReceived;
@@ -113,9 +114,13 @@ function startVotingPhase(io: SocketIOServer, room: Room) {
   room.answers = shuffleArray(answers);
   room.state = GameState.VOTING_ROUND;
   
-  io.to(room.code).emit('votingStarted', {
-    answers: room.answers,
-    question: room.currentQuestion,
+  // Her oyuncuya KENDİ cevabı HARİÇ cevapları gönder
+  room.players.forEach(player => {
+    const filteredAnswers = room.answers.filter(a => a.playerId !== player.id);
+    io.to(player.id).emit('votingStarted', {
+      answers: filteredAnswers,
+      question: room.currentQuestion!,
+    });
   });
   
   // Set timeout for voting (20 seconds)

@@ -142,7 +142,9 @@ export default function QuestionRound({
 
         {/* Hint */}
         <div className="text-center mt-6 text-white text-sm">
-          <p>Yaratıcı olun! En inandırıcı cevap puan kazanır.</p>
+          <p className="font-semibold mb-1">💡 Nasıl Oynanır?</p>
+          <p>Doğru cevabı BİLMİYORMUŞ gibi yaparak yalan bir cevap yaz!</p>
+          <p className="mt-1">Diğer oyuncuları kandır ve puan kazan! 😈</p>
         </div>
       </div>
     </div>

@@ -74,7 +74,10 @@ export default function VotingRound({ question, answers, onSubmitVote }: VotingR
           {!submitted && (
             <div className="bg-hsd-light border-2 border-hsd-secondary rounded-xl p-4 text-center">
               <p className="text-hsd-primary font-medium">
-                Hangisi doğru cevap? Bir tanesini seçin!
+                ⚠️ Hangisi GERÇEK doğru cevap? Yalan cevapları seçme!
+              </p>
+              <p className="text-sm text-gray-600 mt-1">
+                Doğru bilirsen +1 puan, başkalarını kandırırsan her oyuncu için +1 puan!
               </p>
             </div>
           )}
